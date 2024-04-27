@@ -6,7 +6,7 @@ public enum TokenType {
     // One or two character tokens
     BANG, BANG_EQUAL,
     EQUAL, EQUAL_EQUAL,
-    GRATER, GRATER_EQUAL,
+    GREATER, GRATER_EQUAL,
     LESS, LESS_EQUAL,
 
     // Literals
