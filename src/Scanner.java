@@ -43,13 +43,32 @@ public class Scanner {
             case '=': addToken(match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL); break;
             case '<': addToken(match('=') ? TokenType.LESS_EQUAL : TokenType.LESS); break;
             case '>': addToken(match('=') ? TokenType.GRATER_EQUAL : TokenType.GREATER); break;
-            default:
-                Lox.error(line, "Unexpected character.");
+            case '/':
+                if(match('/')) {
+                    // if is a comment, then goes until the end of the line
+                    while(peek() != '\n' && !isAtEnd()) advance();
+                } else {
+                    addToken(TokenType.SLASH);
+                }
                 break;
+            case ' ':
+            case '\r':
+            case '\t':
+                // ignore whitespace
+                break;
+            case '\n':
+                line++;
+                break;
+            default:
+            Lox.error(line, "Unexpected character.");
+            break;
         }
     }
 
-
+    private char peek() {
+        if(isAtEnd()) return '\0';
+        return source.charAt(current);
+    }
     private char advance() {
         return source.charAt(current++);
     }
